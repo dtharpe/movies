@@ -1,14 +1,19 @@
 
 (function(){
 
-	var movYear;
+	var movYear, movSearchData;
 
 	$('#submit_year').click(function(){
 		movYear = $('input[name="movie_year"]').val();
-		movie.init();
+		movies.init();
 	});
 
-	var movie = {
+	$('input[name="movie_search"]').keyup(function(){
+		var searchVal = $(this).val();
+		movies.filterResults(searchVal);
+	});
+
+	var movies = {
 
 		defaults: {
 			urlBase: 'https://itunes.apple.com/search?',
@@ -33,12 +38,12 @@
 				success: function(data){
 					data = data.results;
 					self.buildTemplate(data);
+					self.showSearch(true);
 				}
 			});
 		},
 		buildTemplate: function(datafromXHR){
 			$('#movie_output').empty();
-			console.log(datafromXHR);
 			var self = this;
 			var output = $("#movie_template").html(),
 				data = datafromXHR,
@@ -52,13 +57,32 @@
 				  	}
 			var compiled = template(content);
 			$('#movie_output').append(compiled);
-
-				//click
+			movSearchData = content.movies;
+			console.log(movSearchData);
 				$('.overlay_click').click(function(){
 					var urlFrame = $(this).attr('data-place');
 					self.showOverlayFrame(urlFrame);
 					return false;
 				});
+		},
+		showSearch: function(bool){
+			if (bool == true){
+				$('.movie_search_form').delay(300).fadeIn();
+			}else{
+				$('.movie_search_form').delay(300).fadeOut();
+			}
+		},
+		filterResults: function(val){
+			console.log(val);
+			// $('#movie_output').empty();
+			// var myExp = new RegExp(val, "i");
+			// console.log(myExp);
+			// $.each(movSearchData, function (key, val){
+			// 	if((val.movie_name.search(myExp) != -1)){
+
+				//}
+		
+			// });
 		},
 		showOverlayFrame: function(url){
 			var output = $("#iframe_template").html(),

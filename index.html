@@ -23,16 +23,23 @@
 <input type="text" name="movie_year" placeholder="Enter Year"/>
 <button name="submit_year" type="button" id="submit_year" class="btn btn-danger">Get Movies!</button>
 </div>
+
+<div class="movie_search_form">
+<input type="text" name="movie_search" id="movie_search" placeholder="Type to Search Movies"/>
+</div>
+
 <div class="divide"></div>
 
 <div id="movie_output"></div>
 <script id="movie_template" type="text/x-handlebars-template">
  		<ul>
  		{{#each movies}}
+		<a href="{{url_}}" class="overlay_click" data-place="{{url_}}">
 		<li>
-			<a href="{{url_}}" class="overlay_click" data-place="{{url_}}"><img src="{{imgs_.[2]}}" />
+			<img src="{{imgs_.[2]}}" />
 			<p>{{movie_name}}</p>
 		</li>
+		</a>
 		{{/each}}
 		</ul>
 </script>
