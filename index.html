@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>movies</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+
+<script id="iframe_template" type="text/x-handlebars-template">
+<div class="overlay"></div>
+<div class="frame">
+	<iframe src="{{iframeURL}}&output=embed" width:500;></iframe>
+</div>
+</script>
+<div id="frame_output"></div>
+
+
+
+<div class="movie_form">
+<input type="text" name="movie_year" placeholder="Enter Year"/>
+<button name="submit_year" type="button" id="submit_year" class="btn btn-danger">Get Movies!</button>
+</div>
+<div class="divide"></div>
+
+<div id="movie_output"></div>
+<script id="movie_template" type="text/x-handlebars-template">
+ 		<ul>
+ 		{{#each movies}}
+		<li>
+			<a href="{{url_}}" class="overlay_click" data-place="{{url_}}"><img src="{{imgs_.[2]}}" />
+			<p>{{movie_name}}</p>
+		</li>
+		{{/each}}
+		</ul>
+</script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.3/handlebars.min.js"></script>
+<script src="js/movie.js"></script>
+</body>
+
+</html>
