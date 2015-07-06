@@ -49,16 +49,22 @@
 				data = datafromXHR,
 				template = Handlebars.compile(output),
 			    content = {movies:[]};
+
 					for(var i=0; i<data.length; i++)
 					{		
 						  var imgarr = [];
 						  imgarr.push(data[i].artworkUrl30,data[i].artworkUrl60,data[i].artworkUrl100);
 				  		  content.movies.push({movie_name:data[i].trackCensoredName, imgs_:imgarr, url_:data[i].trackViewUrl});
 				  	}
+				  	
 			var compiled = template(content);
-			$('#movie_output').append(compiled);
+		
+			//$('#movie_output').append(compiled);
+			$("#movie_template").ready(function(){
+				$('#movie_output').append(compiled);
+			});
 			movSearchData = content.movies;
-			console.log(movSearchData);
+
 				$('.overlay_click').click(function(){
 					var urlFrame = $(this).attr('data-place');
 					self.showOverlayFrame(urlFrame);
@@ -95,7 +101,7 @@
 			$('.frame').delay(400).fadeIn();
 		}
 	}
-})(jQuery);
+})();
 
 
 
